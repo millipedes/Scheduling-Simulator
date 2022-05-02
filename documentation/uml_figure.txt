@@ -1,0 +1,77 @@
+@startuml
+
+package ProcessDomain {
+  package Schedulers {
+    class scheduling_alorithm {
+      {field} + sched_alg : void*
+      {field} + sched_alg_type : scheduling_type
+    }
+    package Lottery {
+      class lottery_scheduler {
+        {field} + Distribution : function*
+        {field} + 
+      }
+
+      class lottery {
+      }
+    }
+
+    enum scheduling_type {
+      {field} + LOTTERY
+      {field} + FAIR
+    }
+  }
+
+  package CPU {
+    class cpu_t {
+      {field} + sched_alg : scheduling_alorithm *
+    }
+    class thread {
+        {field} + ctq_work : double
+        {field} + mtq_work : double
+       {method} + int verify_work_quantity()
+    }
+    note left of thread: If a thread consumes less than\nmtq_work in one \
+cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
+  }
+
+  package Process {
+    class process {
+      {field} + related_data : void *
+      {field} + name : char*
+      {field} + proc_t : process_type
+    }
+    enum process_type {
+      LOTTERY
+      FAIR
+    }
+    package LotteryProcess {
+      class base {
+        {field} + total_circulation : ticket_bundle*
+      }
+      package ticket {
+        class ticket_bundle {
+           {field} + tickets : ticket
+          {method} + ticket_bundle * free_ticket_bundle(void)
+          {method} + void free_ticket_bundle(ticket_bundle *)
+        }
+        class Ticket {
+          {field} + amount
+          {field} + curreny
+        }
+      }
+    }
+  }
+}
+
+cpu_t  o--> thread
+cpu_t  o--> scheduling_alorithm
+thread o--> base
+
+
+scheduling_alorithm o--> lottery
+scheduling_alorithm o--> scheduling_type
+
+
+
+@enduml
