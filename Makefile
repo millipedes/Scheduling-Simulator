@@ -26,10 +26,7 @@ THREE: %.c $(HFILES_THREE)%.h
 	$(CC) -c $(CFILES_THREE) $< -o $@ -lm
 
 vim:
-	nvim $(CFILES) 
-
-vimh:
-	nvim $(HFILES) 
+	nvim $(CFILES_ONE) $(CFILES_TWO) $(CFILES_THREE)
 
 run:
 	$(EXEFILE)
@@ -39,6 +36,9 @@ debug:
 
 memcheck:
 	valgrind $(EXEFILE) --leak-check=full --read-var-info
+
+plant:
+	plantuml documentation/uml_figure.txt
 
 git-update:
 	git add Makefile README.md src/ documentation/

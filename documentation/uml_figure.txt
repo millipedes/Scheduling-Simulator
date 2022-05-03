@@ -9,7 +9,6 @@ package ProcessDomain {
     package Lottery {
       class lottery_scheduler {
         {field} + Distribution : function*
-        {field} + 
       }
 
       class lottery {
@@ -35,43 +34,33 @@ package ProcessDomain {
 cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
   }
 
-  package Process {
-    class process {
-      {field} + related_data : void *
-      {field} + name : char*
-      {field} + proc_t : process_type
+  package ticket {
+    class ticket_bundle {
+       {field} + tickets : ticket
+      {method} + ticket_bundle * free_ticket_bundle(void)
+      {method} + void free_ticket_bundle(ticket_bundle *)
     }
-    enum process_type {
-      LOTTERY
-      FAIR
+    class ticket {
+       {field} + amount : int
+       {field} + currency : currency*
+      {method} + ticket * partition_quantity()
     }
-    package LotteryProcess {
-      class base {
-        {field} + total_circulation : ticket_bundle*
-      }
-      package ticket {
-        class ticket_bundle {
-           {field} + tickets : ticket
-          {method} + ticket_bundle * free_ticket_bundle(void)
-          {method} + void free_ticket_bundle(ticket_bundle *)
-        }
-        class Ticket {
-          {field} + amount
-          {field} + curreny
-        }
-      }
+
+    class base {
+      {field} general_population : ticket_bundle**
     }
   }
 }
 
 cpu_t  o--> thread
 cpu_t  o--> scheduling_alorithm
-thread o--> base
 
+thread o--> ticket_bundle
+ticket_bundle o--> ticket
+base o--> ticket_bundle
 
 scheduling_alorithm o--> lottery
 scheduling_alorithm o--> scheduling_type
-
 
 
 @enduml
