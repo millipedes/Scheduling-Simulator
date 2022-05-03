@@ -41,8 +41,7 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
       {method} + void free_ticket_bundle(ticket_bundle *)
     }
     class ticket {
-       {field} + amount : int
-       {field} + currency : currency*
+       {field} + qty : int
       {method} + ticket * partition_quantity()
     }
 
