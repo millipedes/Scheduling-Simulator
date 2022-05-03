@@ -10,9 +10,10 @@
 
 /**
  * This function initializes a ticket_bundle and returns it
+ * @param  id - the id of the ticket bundle
  * @return tb - the ticket_bundle
  */
-ticket_bundle * init_ticket_bundle(void) {
+ticket_bundle * init_ticket_bundle(int id) {
   ticket_bundle * tb = calloc(1, sizeof(struct TICKET_BUNDLE_T));
   tb->tickets = NULL;
   tb->size = 0;
