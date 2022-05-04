@@ -21,6 +21,11 @@ ticket * init_ticket(int qty, int id) {
   return t;
 }
 
+/**
+ * This function frees a ticket, essentially a free alias
+ * @param t - the ticket to be freed
+ * @return N/a
+ */
 void free_ticket(ticket * t) {
   if(t) {
     free(t);

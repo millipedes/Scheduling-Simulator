@@ -26,20 +26,6 @@ base * init_base(int total_space) {
 }
 
 /**
- * This function initializes a base id structure that is used to partition the
- * general population
- * @return bid - the base id structure
- */
-b_id * init_b_id(void) {
-  b_id * bid = calloc(1, sizeof(struct B_ID_T));
-  bid->id_space = NULL;
-  bid->active_ids = NULL;
-  bid->current_id = 0;
-  bid->size = 0;
-  return bid;
-}
-
-/**
  * This function makes a new partition in the general population for the 
  * @param             b - the base to be added onto
  * @param           bid - the base id struct for the given base
@@ -67,12 +53,21 @@ void add_ticket_bundle(base * b, b_id * bid, int partition_qty) {
  * @return
  */
 void delete_ticket_bundle(base * b, b_id * bid, int id) {
-  if(find_ticket_bundle(b, bid, id) == -1) {
+  int tb_index = find_ticket_bundle(b, bid, id);
+  if(tb_index == -1) {
     fprintf(stderr, "[FREE_TICKET_BUNDLE]: ID: `%d` not found. Exiting\n", id);
     exit(1);
   }
 }
 
+/**
+ * This funciton finds a ticket with id id
+ * @param   b - the base from which to look
+ * @param bid - the base id struct associated with the base
+ * @param  id - the id of the ticket the user wishes to find
+ * @return -1 - not found
+ *          i - the index of the ticket_bundle
+ */
 int find_ticket_bundle(base * b, b_id * bid, int id) {
   for(int i = 0; i < bid->size; i++) {
     if(b->general_population[i]->id == id) {
@@ -80,9 +75,6 @@ int find_ticket_bundle(base * b, b_id * bid, int id) {
     }
   }
   return -1;
-}
-
-void free_b_id(b_id * tbid) {
 }
 
 void free_base(base * b, b_id * bid) {
