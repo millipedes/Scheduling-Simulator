@@ -15,6 +15,11 @@
 #include"process_type.h"
 #include"../../Ticket/include/base.h"
 
+typedef struct PROCS_TBC_T {
+  process ** proc_list;
+  int size;
+} procs_tbc;
+
 process * generate_process(base * base, process_type type, int work_qty);
 
 #endif
