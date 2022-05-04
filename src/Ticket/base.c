@@ -32,8 +32,6 @@ base * init_base(int total_space) {
  * @return
  */
 void add_ticket_bundle(base * b, int partition_qty) {
-  b->bid->size++;
-  b->bid->current_id++;
   b->available_space -= partition_qty;
   if(b->general_population) {
     b->general_population = realloc(b->general_population, b->bid->size
@@ -43,14 +41,14 @@ void add_ticket_bundle(base * b, int partition_qty) {
         sizeof(struct TICKET_BUNDLE_T *));
   }
   b->general_population[b->bid->size - 1]
-    = init_ticket_bundle(b->bid->current_id, partition_qty);
+    = init_ticket_bundle(generate_id(b->bid), partition_qty);
 }
 
 /**
  * This function removes a ticket bundle with id id from the base
- * @param   b - the base
- * @param  id - the id of the ticket bundle to be removed
- * @return
+ * @param    b - the base
+ * @param   id - the id of the ticket bundle to be removed
+ * @return N/a
  */
 void delete_ticket_bundle(base * b, int id) {
   int tb_index = find_ticket_bundle(b, id);
@@ -58,6 +56,35 @@ void delete_ticket_bundle(base * b, int id) {
     fprintf(stderr, "[FREE_TICKET_BUNDLE]: ID: `%d` not found. Exiting\n", id);
     exit(1);
   }
+  left_shift_general_population(b, id);
+  delete_last_member(b);
+}
+
+/**
+ * This function shifts everything right of id to the left one and puts id at
+ * the end
+ * @param    b - the base
+ * @param   id - the id from which to be shifted
+ * @return N/a
+ */
+void left_shift_general_population(base * b, int id) {
+  ticket_bundle * tmp;
+  tmp = b->general_population[id];
+  for(int i = id; i < b->bid->size - 1; i++) {
+    b->general_population[i] = b->general_population[i + 1];
+  }
+  b->general_population[b->bid->size - 1] = tmp;
+}
+
+/**
+ * This function deletes the last member of the general_population
+ * @param    b - the base
+ * @return N/a
+ */
+void delete_last_member(base * b) {
+  free_ticket_bundle(b->general_population[b->bid->size - 1]);
+  b->general_population[b->bid->size - 1] = NULL;
+  b->bid->size--;
 }
 
 /**

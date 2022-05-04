@@ -17,11 +17,27 @@
  */
 b_id * init_b_id(void) {
   b_id * bid = calloc(1, sizeof(struct B_ID_T));
-  bid->id_space = NULL;
   bid->active_ids = NULL;
   bid->current_id = 0;
   bid->size = 0;
   return bid;
+}
+
+/**
+ * This function performs the operations required to generate an id
+ * @param         bid - the base id to generate the
+ * @return current_id - the generated id
+ */
+int generate_id(b_id * bid) {
+  bid->size++;
+  bid->current_id++;
+  if(bid->active_ids) {
+    bid->active_ids = realloc(bid->active_ids, bid->size * sizeof(int));
+  } else {
+    bid->active_ids = calloc(bid->size, sizeof(int));
+  }
+  bid->active_ids[bid->size - 1] = bid->current_id;
+  return bid->current_id;
 }
 
 /**
@@ -31,9 +47,6 @@ b_id * init_b_id(void) {
  */
 void free_b_id(b_id * bid) {
   if(bid) {
-    if(bid->id_space) {
-      free(bid->id_space);
-    }
     if(bid->active_ids) {
       free(bid->active_ids);
     }

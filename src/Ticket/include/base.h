@@ -25,6 +25,8 @@ typedef struct BASE_T {
 base * init_base(int total_space);
 void add_ticket_bundle(base * b, int partition_qty);
 void delete_ticket_bundle(base * b, int id);
+void left_shift_general_population(base * b, int id);
+void delete_last_member(base * b);
 int find_ticket_bundle(base * b, int id);
 void free_base(base * b);
 

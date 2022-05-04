@@ -12,13 +12,13 @@
 #include<stdlib.h>
 
 typedef struct B_ID_T {
-  int * id_space;
-  int * active_ids; // 1 - active; 0 - inactive
+  int * active_ids; // indices
   int current_id;
   int size;
 }b_id;
 
 b_id * init_b_id(void);
+int generate_id(b_id * bid);
 void free_b_id(b_id * tbid);
 
 #endif
