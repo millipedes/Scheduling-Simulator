@@ -1,3 +1,11 @@
+/**
+ * @file bid.c
+ * @brief this file contains the function definitions for bid.c
+ * @author Matthew C. Lindeman
+ * @date May 03, 2022
+ * @bug None known
+ * @todo Nothing
+ */
 #ifndef BID_H
 #define BID_H
 
