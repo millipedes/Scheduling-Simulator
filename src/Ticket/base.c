@@ -32,6 +32,7 @@ base * init_base(int total_space) {
  * @return
  */
 void add_ticket_bundle(base * b, int partition_qty) {
+  int ticket_bundle_id = generate_id(b->bid);
   b->available_space -= partition_qty;
   if(b->general_population) {
     b->general_population = realloc(b->general_population, b->bid->size
@@ -40,8 +41,7 @@ void add_ticket_bundle(base * b, int partition_qty) {
     b->general_population = calloc(b->bid->size,
         sizeof(struct TICKET_BUNDLE_T *));
   }
-   b->general_population[b->bid->size - 1]
-     = init_ticket_bundle(generate_id(b->bid));
+  b->general_population[b->bid->size - 1] = init_ticket_bundle(ticket_bundle_id);
   for(int i = 0; i < partition_qty; i++) {
     add_ticket(b->general_population[b->bid->size - 1], i);
   }
@@ -118,6 +118,9 @@ void free_base(base * b) {
         free_ticket_bundle(b->general_population[i]);
       }
       free(b->general_population);
+    }
+    if(b->bid) {
+      free_b_id(b->bid);
     }
     free(b);
   }
