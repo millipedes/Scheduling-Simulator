@@ -17,7 +17,7 @@
  * @return              b - the base
  */
 base * init_base(int total_space) {
-  base * b = calloc(1, sizeof(BASE_T *));
+  base * b = calloc(1, sizeof(struct BASE_T *));
   b->general_population = NULL;
   b->available_space = total_space;
   b->total_space = total_space;
@@ -32,10 +32,10 @@ base * init_base(int total_space) {
  */
 b_id * init_b_id(void) {
   b_id * bid = calloc(1, sizeof(struct B_ID_T));
-  b->id_space = NULL;
-  b->active_ids = NULL;
-  current_id = 0;
-  size = 0;
+  bid->id_space = NULL;
+  bid->active_ids = NULL;
+  bid->current_id = 0;
+  bid->size = 0;
   return bid;
 }
 
@@ -59,10 +59,21 @@ void add_ticket_bundle(base * b, b_id * bid, int partition_qty) {
   b->general_population[bid->size - 1] = init_ticket_bundle(bid->current_id, partition_qty);
 }
 
-void free_ticket_bundle(base * b, int id) {
+/**
+ * This function removes a ticket bundle with id id from the base
+ * @param   b - the base
+ * @param bid - the id structure for the base
+ * @param  id - the id of the ticket bundle to be removed
+ * @return
+ */
+void delete_ticket_bundle(base * b, b_id * bid, int id) {
+  if(find_ticket_bundle(b, bid, id) == -1) {
+    fprintf(stderr, "[FREE_TICKET_BUNDLE]: ID: `%d` not found. Exiting\n", id);
+    exit(1);
+  }
 }
 
-int find_ticket_bundle(base * b, b_id bid, int id) {
+int find_ticket_bundle(base * b, b_id * bid, int id) {
   for(int i = 0; i < bid->size; i++) {
     if(b->general_population[i]->id == id) {
       return i;
@@ -71,22 +82,16 @@ int find_ticket_bundle(base * b, b_id bid, int id) {
   return -1;
 }
 
-void free_tb_id(tb_id * tbid) {
+void free_b_id(b_id * tbid) {
 }
 
-void free_base(base * b) {
+void free_base(base * b, b_id * bid) {
   if(b) {
     if(b->general_population) {
-      for(int i = 0; i < b->size; i++) {
+      for(int i = 0; i < bid->size; i++) {
         free_ticket_bundle(b->general_population[i]);
       }
       free(b->general_population);
-      if(b->id_space) {
-        free(b->id_space);
-      }
-      if(b->active_ids) {
-        free(b->active_ids);
-      }
     }
     free(b);
   }
