@@ -20,7 +20,7 @@ typedef struct B_ID_T {
 
 b_id * init_b_id(void);
 int generate_id(b_id * bid);
-void free_b_id(b_id * tbid);
+void free_b_id(b_id * bid);
 void b_id_dump_stats(b_id * bid);
 
 #endif

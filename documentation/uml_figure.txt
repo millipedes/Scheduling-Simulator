@@ -23,7 +23,7 @@ package ProcessDomain {
 
   package CPU {
     class cpu_t {
-      {field} + sched_alg : scheduling_alorithm *
+      {field} + sched_alg : scheduling_alorithm*
     }
     class thread {
         {field} + ctq_work : double
@@ -34,19 +34,47 @@ package ProcessDomain {
 cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
   }
 
-  package ticket {
+  package Ticket {
     class ticket_bundle {
-       {field} + tickets : ticket
-      {method} + ticket_bundle * free_ticket_bundle(void)
+       {field} + tickets : ticket **
+       {field} + size : int
+       {field} + id : int
+      {method} + ticket_bundle * init_ticket_bundle(int)
+      {method} + void add_ticket(ticket_bundle *, int)
       {method} + void free_ticket_bundle(ticket_bundle *)
+      {method} + void ticket_bundle_dump_stats(ticket_bundle *)
     }
     class ticket {
        {field} + qty : int
-      {method} + ticket * partition_quantity()
+       {field} + id : int
+      {method} + ticket * init_ticket(int qty, int id)
+      {method} + void free_ticket(ticket * t)
+      {method} + void ticket_dump_stats(ticket * t)
     }
 
     class base {
-      {field} general_population : ticket_bundle**
+       {field} + general_population : ticket_bundle**
+       {field} + bid : b_id*
+       {field} + available_space : int
+       {field} + total_space : int
+      {method} + base * init_base(int)
+      {method} + void add_ticket_bundle(base *, int)
+      {method} + void delete_ticket_bundle(base *, int)
+      {method} + void left_shift_general_population(base *, int)
+      {method} + void delete_last_member(base *)
+      {method} + int find_ticket_bundle(base *, int)
+      {method} + void free_base(base *)
+      {method} + void base_dump_stats(base *)
+    }
+
+    class bid {
+       {field} active_ids : int*
+       {field} current_id : int
+       {field} size : int
+      {method} + b_id * init_b_id(void);
+      {method} + int generate_id(b_id *);
+      {method} + void free_b_id(b_id *);
+      {method} + void b_id_dump_stats(b_id *);
     }
   }
 }
@@ -57,6 +85,7 @@ cpu_t  o--> scheduling_alorithm
 thread o--> ticket_bundle
 ticket_bundle o--> ticket
 base o--> ticket_bundle
+base o--> bid
 
 scheduling_alorithm o--> lottery
 scheduling_alorithm o--> scheduling_type

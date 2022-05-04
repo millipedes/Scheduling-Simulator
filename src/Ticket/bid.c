@@ -54,6 +54,11 @@ void free_b_id(b_id * bid) {
   }
 }
 
+/**
+ * This function is used in debugging by printing all data that a bid has
+ * @param  bid - the base id struct to be printed
+ * @return N/a
+ */
 void b_id_dump_stats(b_id * bid) {
   printf("-------------------------------\n");
   for(int i = 0; i < bid->size; i++) {
