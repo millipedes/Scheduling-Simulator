@@ -6,9 +6,11 @@
 #define TMP_LEN 20
 
 int main(void) {
-  b_id * bid =  init_b_id();
-  base * b = init_base(bid, TMP_LEN);
+
+  base * b = init_base(TMP_LEN);
   add_ticket_bundle(b, 2);
   base_dump_stats(b);
+
+  free_base(b);
   return 0;
 }

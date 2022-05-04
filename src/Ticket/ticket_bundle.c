@@ -14,11 +14,11 @@
  * @param size - the total scalar quantity of tickets
  * @return  tb - the ticket_bundle
  */
-ticket_bundle * init_ticket_bundle(int id, int size) {
+ticket_bundle * init_ticket_bundle(int id) {
   ticket_bundle * tb = calloc(1, sizeof(struct TICKET_BUNDLE_T));
   tb->tickets = NULL;
   tb->id = id;
-  tb->size = size;
+  tb->size = 0;
   return tb;
 }
 
@@ -27,15 +27,14 @@ ticket_bundle * init_ticket_bundle(int id, int size) {
  * @param ticket - This is the ticket that will be added to the ticket_bundle
  * @return N/a
  */
-ticket_bundle * add_ticket(ticket_bundle * tb, ticket * ticket) {
+void add_ticket(ticket_bundle * tb, int qty) {
   tb->size++;
   if(tb->tickets) {
     tb->tickets = realloc(tb->tickets, tb->size * sizeof(struct TICKET_T *));
   } else {
     tb->tickets = calloc(tb->size, sizeof(struct TICKET_T *));
   }
-  tb->tickets[tb->size - 1] = ticket;
-  return tb;
+  tb->tickets[tb->size - 1] = init_ticket(qty, tb->size - 1);
 }
 
 

@@ -19,8 +19,8 @@ typedef struct TICKET_BUNDLE_T {
   int id;
 }ticket_bundle;
 
-ticket_bundle * init_ticket_bundle(int id, int size);
-ticket_bundle * add_ticket(ticket_bundle * tb, ticket * ticket);
+ticket_bundle * init_ticket_bundle(int id);
+void add_ticket(ticket_bundle * tb, int qty);
 void free_ticket_bundle(ticket_bundle * tb);
 void ticket_bundle_dump_stats(ticket_bundle * tb);
 

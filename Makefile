@@ -1,4 +1,4 @@
-CC=gcc -g -Wall
+CC=gcc -g -Wall -Wextra
 CFILES_ONE=$(wildcard src/*/*.c)
 CFILES_TWO=$(wildcard src/*/*/*.c)
 CFILES_THREE=$(wildcard src/*/*/*/*.c)

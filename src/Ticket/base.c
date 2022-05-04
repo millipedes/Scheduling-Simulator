@@ -16,9 +16,9 @@
  * @param available_space - the total base units for the base
  * @return              b - the base
  */
-base * init_base(b_id * bid, int total_space) {
-  base * b = calloc(1, sizeof(struct BASE_T *));
-  b->bid = bid;
+base * init_base(int total_space) {
+  base * b = calloc(1, sizeof(struct BASE_T));
+  b->bid = init_b_id();
   b->general_population = NULL;
   b->available_space = total_space;
   b->total_space = total_space;
@@ -41,10 +41,9 @@ void add_ticket_bundle(base * b, int partition_qty) {
         sizeof(struct TICKET_BUNDLE_T *));
   }
    b->general_population[b->bid->size - 1]
-     = calloc(partition_qty, sizeof(struct TICKET_BUNDLE_T));
+     = init_ticket_bundle(generate_id(b->bid));
   for(int i = 0; i < partition_qty; i++) {
-     b->general_population[b->bid->size - 1]
-       = add_ticket(b->general_population[b->bid->size - 1], init_ticket(1, i));
+    add_ticket(b->general_population[b->bid->size - 1], i);
   }
 }
 

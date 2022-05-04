@@ -33,8 +33,8 @@ void free_ticket(ticket * t) {
 }
 
 void ticket_dump_stats(ticket * t) {
-  printf("-------------------------------");
-  printf("QTY: %d", t->qty);
-  printf(" ID: %d", t->id);
-  printf("-------------------------------");
+  printf("-------------------------------\n");
+  printf("QTY: %d\n", t->qty);
+  printf(" ID: %d\n", t->id);
+  printf("-------------------------------\n");
 }
