@@ -16,12 +16,12 @@
  * @param available_space - the total base units for the base
  * @return              b - the base
  */
-base * init_base(int total_space) {
+base * init_base(b_id * bid, int total_space) {
   base * b = calloc(1, sizeof(struct BASE_T *));
+  b->bid = bid;
   b->general_population = NULL;
   b->available_space = total_space;
   b->total_space = total_space;
-  b->total_fault_count = 0;
   return b;
 }
 
@@ -105,8 +105,8 @@ int find_ticket_bundle(base * b, int id) {
 
 /**
  * This function frees a base struct
- * @param b - the base
- * @return
+ * @param    b - the base
+ * @return N/a
  */
 void free_base(base * b) {
   if(b) {
@@ -118,4 +118,28 @@ void free_base(base * b) {
     }
     free(b);
   }
+}
+
+/**
+ * This function dumps the stats of the base struct
+ * @param    b - the base struct
+ * @return N/a
+ */
+void base_dump_stats(base * b) {
+  printf("===============================\n");
+  printf("\tGENERAL POPULATION STATS\n");
+  printf("===============================\n");
+  for(int i = 0; i < b->bid->size; i++) {
+    ticket_bundle_dump_stats(b->general_population[i]);
+  }
+  printf("===============================\n");
+  printf("\tBASE ID STATS\n");
+  printf("===============================\n");
+  b_id_dump_stats(b->bid);
+  printf("===============================\n");
+
+  printf("-------------------------------\n");
+  printf("AVAILABLE SPACE: %d\n", b->available_space);
+  printf("    TOTAL SPACE: %d\n", b->available_space);
+  printf("-------------------------------\n");
 }

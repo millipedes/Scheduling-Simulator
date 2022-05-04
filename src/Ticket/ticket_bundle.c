@@ -53,3 +53,17 @@ void free_ticket_bundle(ticket_bundle * tb) {
     free(tb);
   }
 }
+
+void ticket_bundle_dump_stats(ticket_bundle * tb) {
+  printf("===============================\n");
+  printf("\tTICKET STATS\n");
+  printf("===============================\n");
+  for(int i = 0; i < tb->size; i++) {
+    ticket_dump_stats(tb->tickets[i]);
+  }
+  printf("===============================\n");
+  printf("-------------------------------\n");
+  printf("SIZE: %d\n", tb->size);
+  printf("  ID: %d\n", tb->id);
+  printf("-------------------------------\n");
+}

@@ -53,3 +53,13 @@ void free_b_id(b_id * bid) {
     free(bid);
   }
 }
+
+void b_id_dump_stats(b_id * bid) {
+  printf("-------------------------------\n");
+  for(int i = 0; i < bid->size; i++) {
+    printf("ACTIVE ID[%d]: %d\n", i, bid->active_ids[i]);
+  }
+  printf("     CURRENT ID: %d\n", bid->current_id);
+  printf("           SIZE: %d\n", bid->size);
+  printf("-------------------------------\n");
+}

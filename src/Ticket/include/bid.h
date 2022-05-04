@@ -9,6 +9,7 @@
 #ifndef BID_H
 #define BID_H
 
+#include<stdio.h>
 #include<stdlib.h>
 
 typedef struct B_ID_T {
@@ -20,5 +21,6 @@ typedef struct B_ID_T {
 b_id * init_b_id(void);
 int generate_id(b_id * bid);
 void free_b_id(b_id * tbid);
+void b_id_dump_stats(b_id * bid);
 
 #endif

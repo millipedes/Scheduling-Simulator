@@ -9,6 +9,7 @@
 #ifndef TICK_H
 #define TICK_H
 
+#include<stdio.h>
 #include<stdlib.h>
 
 typedef struct TICKET_T {
@@ -18,5 +19,6 @@ typedef struct TICKET_T {
 
 ticket * init_ticket(int qty, int id);
 void free_ticket(ticket * t);
+void ticket_dump_stats(ticket * t);
 
 #endif

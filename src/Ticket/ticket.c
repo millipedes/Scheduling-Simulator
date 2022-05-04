@@ -31,3 +31,10 @@ void free_ticket(ticket * t) {
     free(t);
   }
 }
+
+void ticket_dump_stats(ticket * t) {
+  printf("-------------------------------");
+  printf("QTY: %d", t->qty);
+  printf(" ID: %d", t->id);
+  printf("-------------------------------");
+}
