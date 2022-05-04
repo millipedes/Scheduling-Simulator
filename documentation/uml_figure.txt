@@ -79,6 +79,10 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
   }
 
   package Process {
+    class process_feeder {
+      {field} + time : int
+    }
+
     class process {
       {field} + tickets : ticket_bundle *
       {field} + type : process_type

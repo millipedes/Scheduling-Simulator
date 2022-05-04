@@ -16,6 +16,7 @@
 typedef struct PROCESS_T {
   ticket_bundle * tb;
   process_type pt;
+  int id;
 }process;
 
 process * init_process(ticket_bundle * tb, process_type pt);

@@ -18,6 +18,7 @@ process * init_process(ticket_bundle * tb, process_type pt) {
   process * p = calloc(1, sizeof(struct PROCESS_T));
   p->tb = tb;
   p->pt = pt;
+  p->id = tb->id;
   return p;
 }
 
