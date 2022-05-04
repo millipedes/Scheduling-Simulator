@@ -68,21 +68,34 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
     }
 
     class bid {
-       {field} active_ids : int*
-       {field} current_id : int
-       {field} size : int
+       {field} + active_ids : int*
+       {field} + current_id : int
+       {field} + size : int
       {method} + b_id * init_b_id(void);
       {method} + int generate_id(b_id *);
       {method} + void free_b_id(b_id *);
       {method} + void b_id_dump_stats(b_id *);
     }
   }
+
+  package Process {
+    class process {
+      {field} + tickets : ticket_bundle *
+      {field} + type : process_type
+    }
+
+    enum process_type {
+      {field} + MEMORY
+      {field} + IO
+    }
+  }
 }
 
 cpu_t  o--> thread
 cpu_t  o--> scheduling_alorithm
+cpu_t  o--> base
 
-thread o--> ticket_bundle
+thread        o--> ticket_bundle
 ticket_bundle o--> ticket
 base o--> ticket_bundle
 base o--> bid
@@ -90,5 +103,7 @@ base o--> bid
 scheduling_alorithm o--> lottery
 scheduling_alorithm o--> scheduling_type
 
+process o--> process_type
+process o--> ticket_bundle
 
 @enduml
