@@ -13,6 +13,7 @@
 #include"thread.h"
 #include"proc_list.h"
 #include"../../Schedulers/include/scheduling_type.h"
+#include"../../Schedulers/include/lottery.h"
 
 typedef struct CPU_T {
   thread ** threads;

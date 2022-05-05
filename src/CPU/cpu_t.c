@@ -49,6 +49,19 @@ thread ** init_cpu_threads(int thread_count, int thread_work_qty) {
 void process_time_quantum(cpu_t * cpu, proc_list * pl) {
   populate_generation(pl); // New processes added to list
   // Depending on SA for all threads schedule using sched_algo
+  switch(cpu->st) {
+    case LOTTERY:
+      for(int i = 0; i < cpu->thread_count; i++) {
+        host_lottery(cpu->threads[i], pl);
+      }
+      break;
+    case FAIR:
+      break;
+    default:
+      fprintf(stderr, "[PROCESS TIME QUANTUM]: unknown scheduling type\n"
+          "Exiting\n");
+      exit(1);
+  }
 }
 
 /**
