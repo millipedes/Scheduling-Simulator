@@ -6,13 +6,8 @@ package ProcessDomain {
       {field} + sched_alg : void*
       {field} + sched_alg_type : scheduling_type
     }
-    package Lottery {
-      class lottery_scheduler {
-        {field} + Distribution : function*
-      }
 
-      class lottery {
-      }
+    class lottery {
     }
 
     enum scheduling_type {
@@ -83,14 +78,23 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
 
   package Process {
     class proc_list {
-      {field} p_list : process **
-      {field} b : base *
-      {field} size : int
+       {field} + p_list : process **
+       {field} + b : base *
+       {field} + size : int
+      {method} + proc_list * init_mem_proc_list(int);
+      {method} + void populate_generation(proc_list*);
+      {method} + void add_process(proc_list*, process*);
+      {method} + void remove_process(proc_list*, int);
+      {method} + process * generate_process(base*, process_type, int);
+      {method} + void free_proc_list(proc_list *);
     }
 
     class process {
-      {field} + tickets : ticket_bundle *
-      {field} + type : process_type
+       {field} + tickets : ticket_bundle *
+       {field} + type : process_type
+      {method} + process * init_process(ticket_bundle*, process_type);
+      {method} + void free_process(process*);
+
     }
 
     enum process_type {

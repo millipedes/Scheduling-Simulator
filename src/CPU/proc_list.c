@@ -75,6 +75,13 @@ void add_process(proc_list * pl, process * np) {
  */
 void remove_process(proc_list * pl, int pid) {
   int index = 0;
+  while(pl->p_list[index]->tb->id != pid) {
+    index++;
+  }
+  if(pl->p_list[index]) {
+    free_process(pl->p_list[index]);
+    pl->p_list[index] = NULL;
+  }
 }
 
 /**

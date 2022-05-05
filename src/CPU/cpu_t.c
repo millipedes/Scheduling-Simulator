@@ -16,10 +16,13 @@
  * provessing in one time quantum
  * @return
  */
-cpu_t * init_cpu(int thread_count, int thread_work_qty) {
+cpu_t * init_cpu(void * sched_algo, scheduling_type st, int thread_count
+    int thread_work_qty) {
   cpu_t * cpu = calloc(1, sizeof(struct CPU_T));
   cpu->thread_count = thread_count;
   cpu->threads = init_cpu_threads(thread_count, thread_work_qty);
+  cpu->sched_algo = sched_algo;
+  return cpu;
 }
 
 /**
@@ -28,7 +31,8 @@ cpu_t * init_cpu(int thread_count, int thread_work_qty) {
  * @param   pl - the process list that will be read/written to
  * @return N/a
  */
-void process_time_quantum(cpu_t * cpu) {
+void process_time_quantum(cpu_t * cpu, proc_list * pl) {
+  populate_generation(pl);
 }
 
 /**
