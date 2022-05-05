@@ -12,18 +12,20 @@
 #include<stdlib.h>
 #include"thread.h"
 #include"proc_list.h"
+#include"../../Schedulers/include/scheduling_type.h"
 
-struct CPU_T {
+typedef struct CPU_T {
   thread ** threads;
   void * sched_algo;
-  scheduling_type st;
+  schedule_type st;
   int thread_count;
   int current_time;
 }cpu_t;
 
-cpu_t * init_cpu(void * sched_algo, scheduling_type st, int thread_count
+cpu_t * init_cpu(void * sched_algo, schedule_type st, int thread_count,
     int thread_work_qty);
+thread ** init_cpu_threads(int thread_count, int thread_work_qty);
 void process_time_quantum(cpu_t * cpu, proc_list * pl);
-void free_cpu(cpt_t * cpu);
+void free_cpu(cpu_t * cpu);
 
 #endif

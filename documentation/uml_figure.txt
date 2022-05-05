@@ -2,11 +2,6 @@
 
 package ProcessDomain {
   package Schedulers {
-    class scheduling_alorithm {
-      {field} + sched_alg : void*
-      {field} + sched_alg_type : scheduling_type
-    }
-
     class lottery {
     }
 
@@ -104,16 +99,13 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
   }
 }
 
-cpu_t  o--> thread
-cpu_t  o--> scheduling_alorithm
-cpu_t  o--> proc_list
+cpu_t o--> thread
+cpu_t o--> proc_list
+cpu_t o--> scheduling_type
 
 ticket_bundle o--> ticket
 base o--> ticket_bundle
 base o--> bid
-
-scheduling_alorithm o--> lottery
-scheduling_alorithm o--> scheduling_type
 
 proc_list o--> process
 proc_list o--> base

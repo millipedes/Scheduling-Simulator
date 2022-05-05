@@ -11,6 +11,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 #include"../../Process/include/process.h"
 #include"../../Process/include/process_type.h"
 #include"../../Ticket/include/base.h"
@@ -27,7 +28,7 @@ proc_list * init_mem_proc_list(int size);
 void populate_generation(proc_list * pl);
 void add_process(proc_list * pl, process * np);
 void remove_process(proc_list * pl, int pid);
-process * generate_process(base * base, process_type type, int work_qty);
+process * generate_process(proc_list * base, process_type type, int work_qty);
 void free_proc_list(proc_list * pl);
 
 #endif

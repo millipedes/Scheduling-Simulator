@@ -23,7 +23,7 @@ proc_list * init_mem_proc_list(int size) {
   }
   pl->size = 0;
   pl->list_fault = 0;
-  return proc_list;
+  return pl;
 }
 
 /**

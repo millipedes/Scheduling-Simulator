@@ -7,3 +7,27 @@
  * @bug None known
  * @todo Nothing
  */
+#include"include/thread.h"
+
+/**
+ * This function initializes a thread
+ * @param work_qty - the total quatity of work that the thread can perform for a
+ * given time quantum
+ * @return     N/a
+ */
+thread * init_thread(int work_qty) {
+  thread * t = calloc(1, sizeof(struct THREAD_T));
+  t->work_qty = work_qty;
+  return t;
+}
+
+/**
+ * This function is just an alias for smart free to look nice
+ * @param    t - the ticket to be freed
+ * @return N/a
+ */
+void free_thread(thread * t) {
+  if(t) {
+    free(t);
+  }
+} 
