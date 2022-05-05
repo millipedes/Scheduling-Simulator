@@ -1,5 +1,5 @@
 /**
- * @file bid.c
+ * @file bid.h
  * @brief this file contains the function definitions for bid.c
  * @author Matthew C. Lindeman
  * @date May 03, 2022
