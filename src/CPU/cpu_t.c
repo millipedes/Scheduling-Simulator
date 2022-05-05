@@ -47,7 +47,8 @@ thread ** init_cpu_threads(int thread_count, int thread_work_qty) {
  * @return N/a
  */
 void process_time_quantum(cpu_t * cpu, proc_list * pl) {
-  populate_generation(pl);
+  populate_generation(pl); // New processes added to list
+  // Depending on SA for all threads schedule using sched_algo
 }
 
 /**
