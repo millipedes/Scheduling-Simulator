@@ -62,6 +62,7 @@ void add_process(proc_list * pl, process * np) {
   }
   if(pl->p_list[index]) {
     pl->p_list[index] = np;
+    pl->size++;
   } else {
     pl->list_fault++;
   }
@@ -81,6 +82,7 @@ void remove_process(proc_list * pl, int pid) {
   if(pl->p_list[index]) {
     free_process(pl->p_list[index]);
     pl->p_list[index] = NULL;
+    pl->size--;
   }
 }
 

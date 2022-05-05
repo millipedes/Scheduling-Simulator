@@ -54,6 +54,7 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
       {method} + void add_ticket_bundle(base *, int)
       {method} + void delete_ticket_bundle(base *, int)
       {method} + void left_shift_general_population(base *, int)
+      {method} + void reduce_bundle(int, int);
       {method} + void delete_last_member(base *)
       {method} + int find_ticket_bundle(base *, int)
       {method} + void free_base(base *)

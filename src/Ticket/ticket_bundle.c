@@ -37,6 +37,29 @@ void add_ticket(ticket_bundle * tb, int qty) {
   tb->tickets[tb->size - 1] = init_ticket(qty, tb->size - 1);
 }
 
+/**
+ * This function reduces the size of a ticket_bundle
+ * @param       tmp - the ticket bundle to be reduced
+ * @param reduction - the qty of tickets to reduce by
+ * @return          - the qty the tb was reduced by
+ */
+int reduce_ticket_bundle_size(ticket_bundle * tmp, int reduction) {
+  if(tmp->size >= reduction) {
+    for(int i = (tmp->size - reduction); i < tmp->size; i++) {
+      free_ticket(tmp->tickets[i]);
+      tmp->tickets[i] = NULL;
+      tmp->size--;
+    }
+    return reduction;
+  } else {
+    for(int i = 0; i < tmp->size; i++) {
+      free_ticket(tmp->tickets[i]);
+      tmp->tickets[i] = NULL;
+      tmp->size--;
+    }
+    return tmp->size;
+  }
+}
 
 /**
  * This funciton frees a ticket_bundle

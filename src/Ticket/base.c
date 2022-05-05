@@ -48,6 +48,27 @@ void add_ticket_bundle(base * b, int partition_qty) {
 }
 
 /**
+ * This function reduces a ticket bundle by some number of tickets
+ * @param         b - the base which backs the currency
+ * @param reduction - the quantity to reduce the ticket_bundle by
+ * @param        id - the id of the ticket_bundle
+ * @return
+ */
+void reduce_bundle(base * b, int reduction, int id) {
+  int index = find_ticket_bundle(b, id);
+  if(index > -1) {
+    ticket_bundle * tmp;
+    tmp = b->general_population[index];
+    b->available_space += reduce_ticket_bundle_size(tmp, reduction);
+    if(tmp->size == 0) {
+      delete_ticket_bundle(b, tmp->id);
+    }
+  } else {
+    fprintf(stderr, "[REDUCE BUNDLE]: ???");
+  }
+}
+
+/**
  * This function removes a ticket bundle with id id from the base
  * @param    b - the base
  * @param   id - the id of the ticket bundle to be removed
