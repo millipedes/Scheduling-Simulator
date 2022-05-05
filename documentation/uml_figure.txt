@@ -23,7 +23,10 @@ package ProcessDomain {
 
   package CPU {
     class cpu_t {
+      {field} + threads : thread **
       {field} + sched_alg : scheduling_alorithm*
+      {field} + thread_count : int
+      {field} + current_time : int
     }
     class thread {
         {field} + ctq_work : double
@@ -79,8 +82,10 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
   }
 
   package Process {
-    class process_feeder {
-      {field} + time : int
+    class proc_list {
+      {field} p_list : process **
+      {field} b : base *
+      {field} size : int
     }
 
     class process {
@@ -97,15 +102,17 @@ cycle, the proc is\ngranted mtq_work - ctq_work\nwork units of tickets.
 
 cpu_t  o--> thread
 cpu_t  o--> scheduling_alorithm
-cpu_t  o--> base
+cpu_t  o--> proc_list
 
-thread        o--> ticket_bundle
 ticket_bundle o--> ticket
 base o--> ticket_bundle
 base o--> bid
 
 scheduling_alorithm o--> lottery
 scheduling_alorithm o--> scheduling_type
+
+proc_list o--> process
+proc_list o--> base
 
 process o--> process_type
 process o--> ticket_bundle
