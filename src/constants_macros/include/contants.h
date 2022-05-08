@@ -1,3 +1,12 @@
+/**
+ * @file constants.h
+ * @brief this file contains some fundemental constants for the program that the
+ * user would be interested in varying.
+ * @author Matthew C. Lindeman
+ * @date May 08, 2022
+ * @bug None known
+ * @todo Nothing
+ */
 #ifndef CONST_H
 #define CONST_H
 

@@ -78,6 +78,12 @@ void free_ticket_bundle(ticket_bundle * tb) {
   }
 }
 
+/**
+ * This function is used for debuggindg, it prints all data related to the
+ * ticket bundle
+ * @param   tb - the ticket bundle
+ * @return N/a
+ */
 void ticket_bundle_dump_stats(ticket_bundle * tb) {
   printf("===============================\n");
   printf("\tTICKET STATS\n");

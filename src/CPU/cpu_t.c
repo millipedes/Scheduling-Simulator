@@ -62,6 +62,12 @@ void process_time_quantum(cpu_t * cpu, proc_list * pl) {
   }
 }
 
+/**
+ * This function is used in debugging to print all data related to the CPU
+ * struct. Unfortunately some are called X_data_dump or X_print_specs
+ * @param  cpu - the cpu
+ * @return N/a
+ */
 void cpu_print_specs(cpu_t * cpu) {
   printf("======================================\n");
   printf("\tThreads\n");

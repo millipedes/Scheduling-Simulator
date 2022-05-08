@@ -9,6 +9,15 @@
  */
 #include"include/lottery.h"
 
+
+/**
+ * This function is responsible for hosting one lottery (to include the
+ * allocation of resources [coded as the reduction of the ticket bundle of] to
+ * the process)
+ * @param  t - the ticket
+ * @param pl - the process list
+ * @return
+ */
 void host_lottery(thread * t, proc_list * pl) {
   time_t ti;
   srand((unsigned) time(&ti));

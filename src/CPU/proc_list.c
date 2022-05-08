@@ -129,6 +129,11 @@ process * generate_process(proc_list * pl, process_type type, int work_qty) {
   return init_process(pl->b->general_population[pl->b->bid->size - 1], type);
 }
 
+/**
+ * This function prints the process list data
+ * @param   pl - the process list to printed
+ * @return N/a
+ */
 void print_proc_list_specs(proc_list * pl) {
   for(int i = 0; i < pl->size; i++) {
     // Some entries are NULL!
