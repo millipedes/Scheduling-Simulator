@@ -12,5 +12,7 @@
 void host_lottery(thread * t, proc_list * pl) {
   time_t ti;
   srand((unsigned) time(&ti));
-  int winning_ticket = rand() % pl->size;
+  int winner = rand() % pl->size;
+  int reduction_index = find_ticket_partition_process_index(pl, winner);
+  reduce_bundle(pl->b, t->work_qty, pl->p_list[reduction_index]->tb->id);
 }

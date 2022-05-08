@@ -49,6 +49,25 @@ void populate_generation(proc_list * pl) {
   }
 }
 
+int find_ticket_partition_process_index(proc_list * pl, int ticket_no) {
+  int ticket_sum = 0;
+  for(int i = 0; i < pl->size; i++) {
+    // Some entries will be NULL!
+    if(pl->p_list[i]) {
+      /**
+       * Essentially just sum up the total number of tickets to simulate a
+       * physical partition for each process
+       */
+      ticket_sum += pl->p_list[i]->tb->size;
+      if(ticket_sum >= ticket_no) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+}
+
 /**
  * This function adds a process to a process list otherwise faults if full
  * @param   pl - the process list

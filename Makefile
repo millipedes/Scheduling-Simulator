@@ -38,7 +38,7 @@ memcheck:
 	valgrind $(EXEFILE) --leak-check=full --read-var-info
 
 plant:
-	plantuml documentation/uml_figure.txt
+	plantuml documentation/plant/uml_figure.txt
 
 git-update:
 	git add Makefile README.md src/ documentation/
