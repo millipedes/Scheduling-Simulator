@@ -160,10 +160,6 @@ int tbid_to_pid(proc_list * pl, int tbid) {
  * @return N/a
  */
 void remove_process(proc_list * pl, int index) {
-  // int index = 0;
-  // while(pl->p_list[index]->tb->id != pid) {
-  //   index++;
-  // }
   if(pl->p_list[index]) {
     free_process(pl->p_list[index]);
     pl->p_list[index] = NULL;
