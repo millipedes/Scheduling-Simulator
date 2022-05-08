@@ -87,9 +87,11 @@ void ticket_bundle_dump_stats(ticket_bundle * tb) {
   printf("===============================\n");
   printf("\tTICKET STATS\n");
   printf("===============================\n");
-  for(int i = 0; i < tb->size; i++) {
-    ticket_dump_stats(tb->tickets[i]);
-  }
+  // for(int i = 0; i < tb->size; i++) {
+  //   if(tb->tickets[i]) {
+  //     ticket_dump_stats(tb->tickets[i]);
+  //   }
+  // }
   printf("===============================\n");
   printf("-------------------------------\n");
   printf("SIZE: %d\n", tb->size);

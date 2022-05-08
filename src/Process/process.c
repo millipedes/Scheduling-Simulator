@@ -31,7 +31,9 @@ void process_print_specs(process * p) {
   printf("============================\n");
   printf("PROCESS TICKET BUNDLE\n");
   printf("============================\n");
-  ticket_bundle_dump_stats(p->tb);
+  if(p->tb) {
+    ticket_bundle_dump_stats(p->tb);
+  }
   printf("----------------------------\n");
   printf("Process Type: %s\n", p->pt == 0 ? "MEMORY" : "IO");
   printf("Process ID: %d\n", p->id);
