@@ -48,7 +48,9 @@ void free_process(process * p) {
   if(p) {
     if(p->tb) {
       free_ticket_bundle(p->tb);
+      p->tb = NULL;
     }
     free(p);
   }
+  p = NULL;
 }

@@ -27,7 +27,7 @@ void delete_ticket_bundle(base * b, int id);
 void left_shift_general_population(base * b, int id);
 void delete_last_member(base * b);
 int find_ticket_bundle(base * b, int id);
-void free_base(base * b);
+void free_base(base * b, int free_tb);
 void base_dump_stats(base * b);
 
 #endif

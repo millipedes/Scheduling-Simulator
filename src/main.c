@@ -24,6 +24,6 @@ int main(void) {
   }
 
   free_cpu(cpu);
-  //free_proc_list(pl);
+  free_proc_list(pl);
   return 0;
 }

@@ -222,7 +222,7 @@ void free_proc_list(proc_list * pl) {
     }
 
     if(pl->b) {
-      free_base(pl->b);
+      free_base(pl->b, 0);
     }
     free(pl);
   }

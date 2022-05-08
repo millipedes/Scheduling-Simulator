@@ -111,14 +111,19 @@ int find_ticket_bundle(base * b, int id) {
 
 /**
  * This function frees a base struct
- * @param    b - the base
- * @return N/a
+ * @param       b - the base
+ * @param free_tb - 1 => free the ticket bundles 0 => Do not free ticket bundles
+ * @return    N/a
  */
-void free_base(base * b) {
+void free_base(base * b, int free_tb) {
   if(b) {
     if(b->general_population) {
-      for(int i = 0; i < b->bid->size; i++) {
-        free_ticket_bundle(b->general_population[i]);
+      if(free_tb == 1) {
+        for(int i = 0; i < b->bid->size; i++) {
+          if(b->general_population[i]) {
+            free_ticket_bundle(b->general_population[i]);
+          }
+        }
       }
       free(b->general_population);
     }
