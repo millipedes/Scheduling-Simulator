@@ -17,7 +17,7 @@
 ticket * init_ticket(int qty, int id) {
   ticket * t = calloc(1, sizeof(struct TICKET_T));
   t->qty = qty;
-  t->qty = id;
+  t->id = id;
   return t;
 }
 

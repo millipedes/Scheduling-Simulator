@@ -19,6 +19,7 @@ int main(void) {
 
   proc_list * pl = init_mem_proc_list(P_LIST_INITIAL_SIZE);
   print_proc_list_specs(pl);
+  process_time_quantum(cpu, pl);
 
   free_cpu(cpu);
   free_proc_list(pl);
