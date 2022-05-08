@@ -89,7 +89,7 @@ void add_process(proc_list * pl, process * np) {
   while(pl->p_list[index] != NULL) {
     index++;
   }
-  if(pl->p_list[index]) {
+  if(pl->size <= index) {
     pl->p_list[index] = np;
     pl->size++;
   } else {

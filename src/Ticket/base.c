@@ -56,10 +56,14 @@ void add_ticket_bundle(base * b, int partition_qty) {
  */
 void reduce_bundle(base * b, int reduction, int id) {
   int index = find_ticket_bundle(b, id);
+  int tmp_size = 0;
   if(index > -1) {
     ticket_bundle * tmp;
     tmp = b->general_population[index];
-    b->available_space += reduce_ticket_bundle_size(tmp, reduction);
+    tmp_size = tmp->size;
+    reduce_ticket_bundle_size(tmp, reduction);
+    b->available_space += (tmp_size - tmp->size);
+
     if(tmp->size == 0) {
       delete_ticket_bundle(b, tmp->id);
     }

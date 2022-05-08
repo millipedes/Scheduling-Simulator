@@ -41,23 +41,22 @@ void add_ticket(ticket_bundle * tb, int qty) {
  * This function reduces the size of a ticket_bundle
  * @param       tmp - the ticket bundle to be reduced
  * @param reduction - the qty of tickets to reduce by
- * @return          - the qty the tb was reduced by
+ * @return      N/a
  */
-int reduce_ticket_bundle_size(ticket_bundle * tmp, int reduction) {
+void reduce_ticket_bundle_size(ticket_bundle * tmp, int reduction) {
+  int tmp_size = tmp->size;
   if(tmp->size >= reduction) {
-    for(int i = (tmp->size - reduction); i < tmp->size; i++) {
+    for(int i = (tmp->size - reduction); i < tmp_size; i++) {
       free_ticket(tmp->tickets[i]);
       tmp->tickets[i] = NULL;
       tmp->size--;
     }
-    return reduction;
   } else {
     for(int i = 0; i < tmp->size; i++) {
       free_ticket(tmp->tickets[i]);
       tmp->tickets[i] = NULL;
       tmp->size--;
     }
-    return tmp->size;
   }
 }
 
