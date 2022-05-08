@@ -5,5 +5,7 @@
 #define MAX_PROC_WORK       100  // The max # of work a proc can have
 #define MEM_PROP            10   // Proportion of mem to (10 mem ~> 1 io)
 #define P_LIST_INITIAL_SIZE 2000 // Starting Base size
+#define THREAD_NO           8
+#define THREAD_WORK         30
 
 #endif

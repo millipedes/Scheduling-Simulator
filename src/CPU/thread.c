@@ -22,6 +22,17 @@ thread * init_thread(int work_qty) {
 }
 
 /**
+ * This is used as a debugging function for the thread structure
+ * @param    t - the thread
+ * @return N/a
+ */
+void thread_print_specs(thread * t) {
+  printf("-----------------------------------------\n");
+  printf("THREAD WORK QTY: %d\n", t->work_qty);
+  printf("-----------------------------------------\n");
+}
+
+/**
  * This function is just an alias for smart free to look nice
  * @param    t - the ticket to be freed
  * @return N/a

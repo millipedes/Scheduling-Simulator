@@ -49,6 +49,16 @@ void populate_generation(proc_list * pl) {
   }
 }
 
+/**
+ * This function finds a particular ticket partition (which is represented by a
+ * ticket_bundle in the code fyi) via the process's index in the prcess list.
+ * Looking back this makes some pretty gross pointer stuff may do it different
+ * next time
+ * @param        pl - the process list
+ * @param ticket_no - the ticket no selected by the lottery
+ * @return -1 - Something went wrong
+ *          i - the index of the ticket for that partition
+ */
 int find_ticket_partition_process_index(proc_list * pl, int ticket_no) {
   int ticket_sum = 0;
   for(int i = 0; i < pl->size; i++) {
@@ -119,6 +129,20 @@ process * generate_process(proc_list * pl, process_type type, int work_qty) {
   return init_process(pl->b->general_population[pl->b->bid->size - 1], type);
 }
 
+void print_proc_list_specs(proc_list * pl) {
+  for(int i = 0; i < pl->size; i++) {
+    // Some entries are NULL!
+    if(pl->p_list[i]) {
+      process_print_specs(pl->p_list[i]);
+    }
+  }
+  base_dump_stats(pl->b);
+  printf("----------------------------\n");
+  printf("PROC LIST SIZE: %d\n", pl->size);
+  printf("PROC LIST LIST FAULT: %d\n", pl->list_fault);
+  printf("----------------------------\n");
+}
+
 /**
  * This function frees a process list
  * @param   pl - the process list to be freed
@@ -128,9 +152,16 @@ void free_proc_list(proc_list * pl) {
   if(pl) {
     if(pl->p_list) {
       for(int i = 0; i < pl->size; i++) {
-        free_process(pl->p_list[i]);
+        // Some will be NULL
+        if(pl->p_list[i]) {
+          free_process(pl->p_list[i]);
+        }
       }
       free(pl->p_list);
+    }
+
+    if(pl->b) {
+      free_base(pl->b);
     }
     free(pl);
   }

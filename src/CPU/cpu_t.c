@@ -16,13 +16,11 @@
  * provessing in one time quantum
  * @return
  */
-cpu_t * init_cpu(void * sched_algo, schedule_type st, int thread_count,
-    int thread_work_qty) {
+cpu_t * init_cpu(schedule_type st, int thread_count, int thread_work_qty) {
   cpu_t * cpu = calloc(1, sizeof(struct CPU_T));
   cpu->thread_count = thread_count;
   cpu->st = st;
   cpu->threads = init_cpu_threads(thread_count, thread_work_qty);
-  cpu->sched_algo = sched_algo;
   return cpu;
 }
 
@@ -62,6 +60,19 @@ void process_time_quantum(cpu_t * cpu, proc_list * pl) {
           "Exiting\n");
       exit(1);
   }
+}
+
+void cpu_print_specs(cpu_t * cpu) {
+  printf("======================================\n");
+  printf("\tThreads\n");
+  printf("======================================\n");
+  for(int i = 0; i < cpu->thread_count; i++) {
+    thread_print_specs(cpu->threads[i]);
+  }
+  printf("--------------------------------------\n");
+  printf("THREAD COUNT: %d\n", cpu->thread_count);
+  printf("CURRENT TIME: %d\n", cpu->thread_count);
+  printf("--------------------------------------\n");
 }
 
 /**

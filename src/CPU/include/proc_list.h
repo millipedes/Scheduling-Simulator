@@ -30,6 +30,7 @@ int find_ticket_partition_process_index(proc_list * pl, int ticket_no);
 void add_process(proc_list * pl, process * np);
 void remove_process(proc_list * pl, int pid);
 process * generate_process(proc_list * base, process_type type, int work_qty);
+void print_proc_list_specs(proc_list * pl);
 void free_proc_list(proc_list * pl);
 
 #endif

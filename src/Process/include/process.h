@@ -20,6 +20,7 @@ typedef struct PROCESS_T {
 }process;
 
 process * init_process(ticket_bundle * tb, process_type pt);
+void process_print_specs(process * p);
 void free_process(process * p);
 
 #endif

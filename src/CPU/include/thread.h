@@ -9,6 +9,7 @@
 #ifndef THRE_H
 #define THRE_H
 
+#include<stdio.h>
 #include<stdlib.h>
 
 typedef struct THREAD_T {
@@ -16,6 +17,7 @@ typedef struct THREAD_T {
 }thread;
 
 thread * init_thread(int work_qty);
+void thread_print_specs(thread * t);
 void free_thread(thread * t);
 
 #endif
