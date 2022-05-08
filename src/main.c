@@ -18,8 +18,10 @@ int main(void) {
   cpu_print_specs(cpu);
 
   proc_list * pl = init_mem_proc_list(P_LIST_INITIAL_SIZE);
-  process_time_quantum(cpu, pl);
-  print_proc_list_specs(pl);
+  for(int i = 0; i < 2; i++) {
+    process_time_quantum(cpu, pl);
+    print_proc_list_specs(pl);
+  }
 
   free_cpu(cpu);
   //free_proc_list(pl);

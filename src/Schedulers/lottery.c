@@ -27,5 +27,7 @@ void host_lottery(thread * t, proc_list * pl) {
     winner = rand() % windex;
   }
   int reduction_index = find_ticket_partition_process_index(pl, winner);
-  reduce_bundle(pl->b, t->work_qty, pl->p_list[reduction_index]->tb->id);
+  if(pl->b->bid->size > 0 && pl->p_list[reduction_index]->tb) {
+    reduce_bundle(pl, t->work_qty, pl->p_list[reduction_index]->tb->id);
+  }
 }

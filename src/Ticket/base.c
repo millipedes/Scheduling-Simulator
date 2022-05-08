@@ -48,31 +48,6 @@ void add_ticket_bundle(base * b, int partition_qty) {
 }
 
 /**
- * This function reduces a ticket bundle by some number of tickets
- * @param         b - the base which backs the currency
- * @param reduction - the quantity to reduce the ticket_bundle by
- * @param        id - the id of the ticket_bundle
- * @return
- */
-void reduce_bundle(base * b, int reduction, int id) {
-  int index = find_ticket_bundle(b, id);
-  int tmp_size = 0;
-  if(index > -1) {
-    ticket_bundle * tmp;
-    tmp = b->general_population[index];
-    tmp_size = tmp->size;
-    reduce_ticket_bundle_size(tmp, reduction);
-    b->available_space += (tmp_size - tmp->size);
-
-    if(tmp->size == 0) {
-      delete_ticket_bundle(b, tmp->id);
-    }
-  } else {
-    fprintf(stderr, "[REDUCE BUNDLE]: ???");
-  }
-}
-
-/**
  * This function removes a ticket bundle with id id from the base
  * @param    b - the base
  * @param   id - the id of the ticket bundle to be removed
@@ -84,8 +59,9 @@ void delete_ticket_bundle(base * b, int id) {
     fprintf(stderr, "[FREE_TICKET_BUNDLE]: ID: `%d` not found. Exiting\n", id);
     exit(1);
   }
-  left_shift_general_population(b, id);
-  delete_last_member(b);
+  free_ticket_bundle(b->general_population[tb_index]);
+  b->general_population[tb_index] = NULL;
+  b->bid->size--;
 }
 
 /**
@@ -124,8 +100,10 @@ void delete_last_member(base * b) {
  */
 int find_ticket_bundle(base * b, int id) {
   for(int i = 0; i < b->bid->size; i++) {
-    if(b->general_population[i]->id == id) {
-      return i;
+    if(b->general_population[i]) {
+      if(b->general_population[i]->id == id) {
+        return i;
+      }
     }
   }
   return -1;
@@ -161,7 +139,9 @@ void base_dump_stats(base * b) {
   printf("\tGENERAL POPULATION STATS\n");
   printf("===============================\n");
   for(int i = 0; i < b->bid->size; i++) {
-    ticket_bundle_dump_stats(b->general_population[i]);
+    if(b->general_population[i]) {
+      ticket_bundle_dump_stats(b->general_population[i]);
+    }
   }
   printf("===============================\n");
   printf("\tBASE ID STATS\n");

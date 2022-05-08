@@ -30,6 +30,7 @@ void free_ticket(ticket * t) {
   if(t) {
     free(t);
   }
+  t = NULL;
 }
 
 void ticket_dump_stats(ticket * t) {

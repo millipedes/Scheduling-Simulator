@@ -68,7 +68,9 @@ int find_ticket_partition_process_index(proc_list * pl, int ticket_no) {
        * Essentially just sum up the total number of tickets to simulate a
        * physical partition for each process
        */
-      ticket_sum += pl->p_list[i]->tb->size;
+      if(pl->p_list[i]->tb) {
+        ticket_sum += pl->p_list[i]->tb->size;
+      }
       if(ticket_sum >= ticket_no) {
         return i;
       }
@@ -98,16 +100,75 @@ void add_process(proc_list * pl, process * np) {
 }
 
 /**
+ * This function reduces a ticket bundle by some number of tickets
+ * @param         b - the base which backs the currency
+ * @param reduction - the quantity to reduce the ticket_bundle by
+ * @param        id - the id of the ticket_bundle
+ * @return
+ */
+void reduce_bundle(proc_list * pl, int reduction, int id) {
+  int process_index = tbid_to_pid(pl, id);
+  int tmp_size = 0;
+  int tbid = find_ticket_bundle(pl->b, id);
+  ticket_bundle * tmp;
+  if(process_index > -1 && tbid > -1) {
+    if(pl->b->general_population[tbid]) {
+      tmp = pl->b->general_population[tbid];
+      tmp_size = tmp->size;
+      reduce_ticket_bundle_size(tmp, reduction);
+      if(tmp_size > reduction) {
+        pl->b->available_space += (tmp_size - tmp->size);
+      } else {
+        pl->b->available_space += tmp_size;
+      }
+
+      if(tmp->size == 0) {
+        invalidate_tb(pl, process_index);
+        delete_ticket_bundle(pl->b, tmp->id);
+      }
+    }
+  } else {
+    // process_index = tbid_to_pid(pl, id);
+    // if(process_index != -1) {
+    //   remove_process(pl, process_index);
+    // }
+  }
+}
+
+void invalidate_tb(proc_list * pl, int process_index) {
+  pl->p_list[process_index]->tb = NULL;
+}
+
+/**
+ * This function converts a ticket bundle id to a process id
+ * @param tbid - the ticket_bundle id
+ * @return i - the index of the process
+ *        -1 - not found!
+ */
+int tbid_to_pid(proc_list * pl, int tbid) {
+  for(int i = 0; i < pl->size; i++) {
+    if(pl->p_list[i]) {
+      if(pl->p_list[i]->tb) {
+        if(pl->p_list[i]->tb->id == tbid) {
+          return i;
+        }
+      }
+    }
+  }
+  return -1;
+}
+
+/**
  * This function removes a process with a given id from the process list
  * @param   pl - the process list
  * @param  pid - the process id
  * @return N/a
  */
-void remove_process(proc_list * pl, int pid) {
-  int index = 0;
-  while(pl->p_list[index]->tb->id != pid) {
-    index++;
-  }
+void remove_process(proc_list * pl, int index) {
+  // int index = 0;
+  // while(pl->p_list[index]->tb->id != pid) {
+  //   index++;
+  // }
   if(pl->p_list[index]) {
     free_process(pl->p_list[index]);
     pl->p_list[index] = NULL;

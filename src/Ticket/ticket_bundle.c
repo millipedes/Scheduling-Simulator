@@ -52,7 +52,7 @@ void reduce_ticket_bundle_size(ticket_bundle * tmp, int reduction) {
       tmp->size--;
     }
   } else {
-    for(int i = 0; i < tmp->size; i++) {
+    for(int i = 0; i < tmp_size; i++) {
       free_ticket(tmp->tickets[i]);
       tmp->tickets[i] = NULL;
       tmp->size--;
@@ -75,6 +75,7 @@ void free_ticket_bundle(ticket_bundle * tb) {
     }
     free(tb);
   }
+  tb = NULL;
 }
 
 /**
