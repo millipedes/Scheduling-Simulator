@@ -127,11 +127,6 @@ void reduce_bundle(proc_list * pl, int reduction, int id) {
         delete_ticket_bundle(pl->b, tmp->id);
       }
     }
-  } else {
-    // process_index = tbid_to_pid(pl, id);
-    // if(process_index != -1) {
-    //   remove_process(pl, process_index);
-    // }
   }
 }
 
