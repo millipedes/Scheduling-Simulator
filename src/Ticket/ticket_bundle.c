@@ -85,9 +85,9 @@ void free_ticket_bundle(ticket_bundle * tb) {
  * @return N/a
  */
 void ticket_bundle_dump_stats(ticket_bundle * tb) {
-  printf("===============================\n");
-  printf("\tTICKET STATS\n");
-  printf("===============================\n");
+  // printf("===============================\n");
+  // printf("\tTICKET STATS\n");
+  // printf("===============================\n");
   // for(int i = 0; i < tb->size; i++) {
   //   if(tb->tickets[i]) {
   //     ticket_dump_stats(tb->tickets[i]);

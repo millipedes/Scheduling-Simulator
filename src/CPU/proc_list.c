@@ -130,6 +130,12 @@ void reduce_bundle(proc_list * pl, int reduction, int id) {
   }
 }
 
+/**
+ * This is just an explicit declaration of what this logically implies
+ * @param            pl - the process list
+ * @param process_index - the index of the process list to be nullified
+ * @return          N/a
+ */
 void invalidate_tb(proc_list * pl, int process_index) {
   pl->p_list[process_index]->tb = NULL;
 }
