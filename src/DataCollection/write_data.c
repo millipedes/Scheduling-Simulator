@@ -9,6 +9,12 @@
  */
 #include"include/write_data.h"
 
+/**
+ * This function is used as the code entry point for conducting tests using the
+ * system
+ * @param  N/a
+ * @return N/a
+ */
 void conduct_test(void) {
   int testing_time = 30;
   FILE * fp = fopen("data_out/data.txt", "w");
