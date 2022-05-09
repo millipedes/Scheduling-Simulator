@@ -1,4 +1,7 @@
 # :tropical_fish: CPU Simulator
+For a much more deatiled explanation of what this project is/does, please see
+the `documentation/` directory, particularly the report.pdf file and the
+comments among the code.
 ## :trophy: Project Description/Goal
 This project was designed to give users an interface to experiment with
 scheduling algorithms.
@@ -30,3 +33,17 @@ $ make
 ```
 Which will generate a binary. To conduct different tests, I would suggest
 checking out the write_data.c file, particularly the conduct_test function.
+
+:microscope: Encouraged Extensibility
+The following parameters can be verified and the results can be observed:
+- MAX_NG_PROCS - The maximum number of new processes generated for each time
+  quantum.
+- MAX_PROC_WORK - The maximum amount of work that a process can be asigned until
+  its completion.
+- MEM_PROP - The proportion of IO to MEMORY related processes. This feature is
+  still experimental and has no effect.
+- P_LIST_INITIAL_SIZE - The initial size of the process list.
+- THREAD_NO - The number of threads that each CPU has.
+- THREAD_WORK - The amount of work that each thread performs in a given time
+  quantum.
+
