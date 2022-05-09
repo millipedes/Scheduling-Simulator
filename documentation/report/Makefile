@@ -1,10 +1,9 @@
 all:
 	pdflatex report.tex
-	#rm *.aux *.log *.out
 	clear
 open:
 	evince report.pdf&
 clean:
-	rm *.aux *.log
+	rm *.aux *.log *.out
 vim:
 	nvim report.tex
