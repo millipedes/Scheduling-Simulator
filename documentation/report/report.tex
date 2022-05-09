@@ -61,7 +61,7 @@
 %% article.
 \begin{abstract}
   This project is meant to be an environment from which the user can test
-  scheduling algorithms to duduce logical statements about them in a reasonable
+  scheduling algorithms to deduce logical statements about them in a reasonable
   manner. A reasonable manner in this instance, is a way in which the only
   interface for the user to interact with is the implementation of the
   scheduling algorithm itself in native C code. In this manner, roughly, scheduling algorithms
@@ -92,16 +92,16 @@
 \maketitle
 
 \begin{multicols}{2}
-    \section{Overveiw of the Project}
+    \section{Overview of the Project}
     For a visual reference please see the uml document hosted under the
     source project directory {\csfont{documentation/plant/uml$\_$figure.png}}.
-    \subsection{Fundemental Structure}
+    \subsection{Fundamental Structure}
     For the system to be opaque to the user, a scheduling algorithm must be
     well defined. Thus we will define it using three variants: $\alpha$,
-    $\beta$, and $\gamma$. Which are defined repspectively to be the following:
+    $\beta$, and $\gamma$. Which are defined respectively to be the following:
     \begin{enumerate}
       \item $\alpha$ - the hardware environment which the algorithm runs on
-        (alogous to the base unit of execution in the project as work is
+        (analogous to the base unit of execution in the project as work is
         measured as a scalar not a vector).
       \item $\beta$ - The characteristics that the scheduling algorithm
         associates with each process (this can be the empty set and in the code
@@ -110,7 +110,7 @@
         this was implemented was using the relationship between process and
         proc$\_$list. Each of these structures have generic ports to custom data
         types. This is where work quantity being a scalar not a vector becomes
-        useful as regarless of the data types required by the algorithm, the end
+        useful as regardless of the data types required by the algorithm, the end
         quantity of work being performed (what is recorded by each process) can
         be ported to this scalar work quantity which is universal.
       \item $\gamma$ - The scheduling algorithm itself (this is the primarily
@@ -119,17 +119,17 @@
         the project infrastructure).
     \end{enumerate}
     Using these variants it becomes clear that a system capable of handling a
-    varrying $\alpha$, $\beta$, and $\gamma$ in extensible C code must have
+    varying $\alpha$, $\beta$, and $\gamma$ in extensible C code must have
     the following:
     \begin{itemize}
-      \item Have a process tracking infrastructure capable of communitcating
+      \item Have a process tracking infrastructure capable of communicating
         with a generic interface, both storing and writing data.
       \item The units of the process tracking system must be capable of having
-        varrying attributes.
+        varying attributes.
       \item A generic and universal way of representing work.
     \end{itemize}
     The uml diagram contains a full accounting of the project, but some of the
-    more fundemental and high level objects can be used to explain the
+    more fundamental and high level objects can be used to explain the
     functionality of the system.
     \par
     Some of the  genericity of the following subsystems have yet to be
@@ -158,14 +158,14 @@
     \textbf{base} - In the description of the implementation of the lottery
     scheduling algorithm, the researchers who wrote the paper mentioned a
     particular data structure which was used to more efficiently track tickets.
-    This structre involded having pointers from the threads to the currently
+    This structure involved having pointers from the threads to the currently
     executing process's tickets which in turn had pointers to processes with
     pointers to tickets and this process is repeated until the process is
     pointing the the base structure of currency.
     \par
 
 \section{List of Supported variants}
-  The following are the vartiants that can be changed that would be of use to
+  The following are the variants that can be changed that would be of use to
   the user. Additionally, the structural extensibility of the project is
   discussed. Any all-caps reference is a definition under the source project
   file: {\csfont{src/constants$\_$macros/include/constants.h}}.
@@ -189,7 +189,7 @@
     \begin{enumerate}
       \item There exists a pointer from proc$\_$list to process which allows for
         the downward flow of data.
-      \item proc$\_$list and process both void pointer data ports to recieve
+      \item proc$\_$list and process both void pointer data ports to receive
         data from a scheduling algorithm.
     \end{enumerate}
     Data Variants:
@@ -209,38 +209,38 @@
     Structural Extensibility:
     \begin{itemize}
       \item The algorithm implementation can be changed dynamically under the
-        condition it feeds data into the proper ports with the surounding
+        condition it feeds data into the proper ports with the surrounding
         system.
       \item The algorithm data structures can be changed dynamically under the
-        condition that it feeds data into the proper ports of the surounding
+        condition that it feeds data into the proper ports of the surrounding
         system.
     \end{itemize}
     Due to the nature of $\beta$ there should exist no variance in the data
     related to $\gamma$.
 
 \section{Lottery Scheduling System}
-  As previously mentioned, as a proof of concept of the system itselt I
-  implemented the lottery scheduling alghorithm as a sample $\gamma$ (note that
-  the uml diagram is relflective of this). Below I will describe the manner in
+  As previously mentioned, as a proof of concept of the system itself I
+  implemented the lottery scheduling algorithm as a sample $\gamma$ (note that
+  the uml diagram is reflective of this). Below I will describe the manner in
   which $\alpha$, $\beta$, and $\gamma$ were realized in the system.
   \subsection{$\alpha$ Implementation}
     This is done via CPU with threads that have direct work quantity that they
     fulfil each time quantum.
   \subsection{$\beta$ Implementation}
     This is where this project best illustrates how it is extensible. In order
-    to discuss why, first we must reveiw the way in which the lottery scheduling
+    to discuss why, first we must review the way in which the lottery scheduling
     algorithm determines where its currencies are backed from.
     \par
-    The way in which this was implemetned for the lottery scheduling algorithm
+    The way in which this was implemented for the lottery scheduling algorithm
     was by using a base currency structure which interfaces with proc$\_$list
     via pointers and ticket$\_$bundles which interact with process replicating
     (with a few extra explicit edges in the representative graph of the data
     structure) the process described in the lottery scheduling algorithm paper.
   \subsection{$\gamma$ Implementation}
-    The entirety of the lotttery scheduling interface itself can be found in
+    The entirety of the lottery scheduling interface itself can be found in
     Appendix figure 1. The process list can be used to alter and get data, but
     under the hood it is the user defined base and ticket$\_$bundle structures
-    that fundementally store the data.
+    that fundamentally store the data.
 
 \section{Example Experiment Using the Subsystem}
   \subsection{Premise}
@@ -260,7 +260,7 @@
     Now that the variants are decided upon, the user will chose which aspect(s)
     of the system the wish to examine in relationship to these variants. For
     this example, we will observe the affect of these variants on the
-    proc$\_$list across time quantums.
+    proc$\_$list across time quanta.
     \par
     As it would be standard to do (and this project makes trivial) we must state
     our assumptions:
@@ -322,7 +322,7 @@
 \section{Conclusion}
   The results from the test experiment seem reasonable. Additionally, the
   interface between $\gamma$ and the system is just a matter of coding the
-  implementation of the scheduling algorithm and its respective data sctructures
+  implementation of the scheduling algorithm and its respective data structures
   in C then modifying conduct$\_$test(). For these reasons, I would argue that
   this tool accomplishes, at least at a base level, its goal.
 
@@ -342,7 +342,7 @@
 \end{multicols}
 \section{References}
 \begin{enumerate}
-  \item Waldspurger, Weihl, Lottery Schedduling: Flexiblle Proportional-Share
+  \item Waldspurger, Weihl, Lottery Schedduling: Flexible Proportional-Share
     Management
   \item Moring, Schultz, Uetz, Approximation of stochastic scheduling: the
     power of LP-based piority policies.
