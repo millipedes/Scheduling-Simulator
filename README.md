@@ -47,3 +47,8 @@ The following parameters can be verified and the results can be observed:
 - THREAD_WORK - The amount of work that each thread performs in a given time
   quantum.
 
+The CPU, process, and proc_list structures were all designed with genericity in
+mind. At the moment there is no exact and easy process for the user to follow to
+make their own scheduling algorithm, but soon there will be an exact list of
+ins/outs required for the system to be extended by any user who only has to
+implement the scheduling algorithm and the scheduling algorithm data structures.
