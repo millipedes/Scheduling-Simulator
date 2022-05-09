@@ -68,9 +68,7 @@
   can be judged based off of performance with respect to a particular feature.
   For example, scheduling algorithm X may be better at handling IO processes in
   short bursts. This project is the collection of code that represents the base
-  unit of execution (i.e. you could have 2 fpga architecture CPUs working with
-  an x86 architecture CPUs where the base unit of execution is a client to the
-  central processing system), process list in a manner from which data can
+  unit of execution, process list in a manner from which data can
   generically be piped in and out, and the data collection elements bassed of
   the base unit of execution. Additionally, as a proof of concept, I have
   implemented the lottery scheduling algorithm and used the system to collect
@@ -136,7 +134,7 @@
     \par
     Some of the  genericity of the following subsystems have yet to be
     implemented in the project, as currently the lottery scheduling algorithm
-    has been hard coded types in the source code.  These can be replaced by void
+    has been hard coded with respect to types in the source code.  These can be replaced by void
     pointers instead to achieve this genericity and the code functions in the
     same manner.
     \par
@@ -289,7 +287,7 @@
     This is the first test for which processes are introduced with low maximum
     potential work to be completed, and low maximum number of processes
     generated each generation. The user can see that this is unsustainable over
-    time and that the available space will tent to 0.
+    time and that the available space will tend to 0.
     \par
     \includegraphics[scale=0.4, page=2]{{./firgures/data/Rplots.pdf}}
     \par
