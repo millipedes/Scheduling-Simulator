@@ -34,7 +34,7 @@ $ make
 Which will generate a binary. To conduct different tests, I would suggest
 checking out the write_data.c file, particularly the conduct_test function.
 
-:microscope: Encouraged Extensibility
+# :microscope: Encouraged Extensibility
 The following parameters can be verified and the results can be observed:
 - MAX_NG_PROCS - The maximum number of new processes generated for each time
   quantum.
